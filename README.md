@@ -70,7 +70,7 @@
 
 > | http code | http status message | content-type                      | response                                                                                             |
 > |-----------|---------------------|-----------------------------------|------------------------------------------------------------------------------------------------------|
-> | `200`     | `CREATED`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{app_host}/dashboard?__csst={unique_token}","verified":boolean}` |
+> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{app_host}/dashboard?__csst={unique_token}","verified":boolean}` |
 
 *Standard error responses are used for most common errors.
 
@@ -78,7 +78,7 @@
 
 > ```bash
 >  curl --request GET \
->  --url https://{app | stage-app}.current.tech/api/v2/auth/login/{ user_id} \
+>  --url https://{app | stage-app}.current.tech/api/v2/auth/login/{ user_id } \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
 >  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
@@ -100,13 +100,13 @@
 > |------------|------------|------------------------|-----------------------------------------------------------------------|
 > | `email`    | `required` | `string`               | `user email`                                                          |
 > | `password` | `required` | `string`               | `user password`                                                       |
+> | `id`       | `required` | `string`               | `user id - used to compare incoming and outgoing users`               |
 
 #### Responses
 
 > | http code | http status message | content-type                      | response                                                                                             |
 > |-----------|---------------------|-----------------------------------|------------------------------------------------------------------------------------------------------|
-> | `201`     | `CREATED`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{app_host}/dashboard?__csst={unique_token}","verified":boolean}` |
-> | `302`     | `FOUND`             | `application/json`                | `"id":"{ user_id }","redirect_url":"{app_host}/dashboard?__csst={unique_token}","verified":boolean}` |
+> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{app_host}/dashboard?__csst={unique_token}","verified":boolean}` |
 
 *Standard error responses are used for most common errors.
 
@@ -121,7 +121,8 @@
 >  --data '
 >  {
 >    "email": "john.doe@email.com",
->    "password": "mysupersecretpassword"
+>    "password": "mysupersecretpassword",
+>    "id": "0s9df-af9sf-uaSD-sFD09DFSDFJD"
 >  }
 >  '
 > ```
@@ -171,6 +172,7 @@
 >  --data '
 >  {
 >    "email": "john.doe@email.com",
+>    "password": "supersecretpassword",
 >    "first_name": "John",
 >    "last_name": "Doe"
 >  }
