@@ -96,11 +96,11 @@
 
 ##### Data Parameters
 
-> | name       |  type      | data type              | description                                                           |
-> |------------|------------|------------------------|-----------------------------------------------------------------------|
-> | `email`    | `required` | `string`               | `user email`                                                          |
-> | `password` | `required` | `string`               | `user password`                                                       |
-> | `id`       | `required` | `string`               | `user id - used to compare incoming and outgoing users`               |
+> | name       |  type      | data type              | description                                                                               |
+> |------------|------------|------------------------|-------------------------------------------------------------------------------------------|
+> | `email`    | `required` | `string`               | `user email`                                                                              |
+> | `password` | `required` | `string`               | `user password`                                                                           |
+> | `id`       | `optional` | `string`               | `user id - used to compare incoming and outgoing users - improved security`               |
 
 #### Responses
 
