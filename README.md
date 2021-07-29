@@ -196,13 +196,13 @@
 > |------------|------------|---------------|-----------------------------------------------------------------------|
 > | `order_id`  | `required` | `string`      | `the order id from your store that you are trying to either reject or modify the attribution to an ambassador`                  |
 
-
 ##### Data Parameters
 
-> | name           |  type        | data type             | description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-> |----------------|--------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-> | `new_amount`        | `optional`   | `number (cents)`              | `new amount of ambassador sales attribution in cents (example: $1.01 -> 101, $123.45 -> 12345)`                                                                                                                                                                                                                                                                                                                                                                                                             |
-> | `rejected`   | `optional`   | `boolean`              | `set rejected to true or false for an ambassador sales attribution (attribution will not be paid out to ambassador if rejected = true)`                                                                                                                                                                                                                                                                                                                                                                                                               
+> | name           |  type        | data type             | description                                                                                                                                           |
+> |----------------|--------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+> | `new_amount`   | `optional`   | `number (cents)`      | `new amount of ambassador sales attribution in cents (example: $1.01 -> 101, $123.45 -> 12345)`                                                       |
+> | `rejected`     | `optional`   | `boolean`             | `set rejected to true or false for an ambassador sales attribution (attribution will not be paid out to ambassador if rejected = true)`               |
+
 *Note: even though both data parameters are listed as optional, you must include one of them for a successful ambassador sales attribution modification.</br>
 *Note: setting a new_amount for an attribution that was previously rejected, will result in unrejecting the attribution, and setting it to the new_amount provided.
 #### Responses
@@ -227,6 +227,7 @@
 >  }
 >  '
 > ```
+
 #### Example cURL Attribution Rejection
 
 > ```bash
