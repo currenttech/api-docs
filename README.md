@@ -207,9 +207,9 @@
 *Note: setting a new_amount for an attribution that was previously rejected, will result in unrejecting the attribution, and setting it to the new_amount provided.
 #### Responses
 
-> | http code | http status message | content-type                      | response                                                                                                                                                                                            |
-> |-----------|---------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-> | `202`     | `ACCEPTED`           | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"modified_attributions": 1`<br/>`}` |
+> | http code | http status message  | content-type                     | response                                                             |
+> |-----------|----------------------|----------------------------------|----------------------------------------------------------------------|
+> | `202`     | `ACCEPTED`           | `application/json`               | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"modified_attributions": 1`<br/>`}` |
 
 *Standard error responses are used for most common errors.
 
@@ -251,9 +251,9 @@
 
 ##### URL Parameters
 
-> | name       |  type      | data type     | description                                                           |
-> |------------|------------|---------------|-----------------------------------------------------------------------|
-> | `discount_code`  | `required` | `string`      | `discount_code input into shop`                                 |
+> | name             |  type      | data type     | description                                                           |
+> |------------------|------------|---------------|-----------------------------------------------------------------------|
+> | `discount_code`  | `required` | `string`      | `discount_code input into shop`                                       |
 
 ##### Data Parameters
 
@@ -261,9 +261,48 @@
 
 #### Responses
 
-> | http code | http status message | content-type                      | response                                                                                             |
-> |-----------|---------------------|-----------------------------------|------------------------------------------------------------------------------------------------------|
-> | `200`     | `OK`           | `application/json`                | `"discount_code":"{ discount_code }","code_exists":boolean,"ambassador_commission":string,"user_id":"{user_uuid}"}`  |
+> | http code | http status message | content-type                 | response                                                                                                             |
+> |-----------|---------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------|
+> | `200`     | `OK`                | `application/json`           | `"discount_code":"{ discount_code }","code_exists":boolean,"ambassador_commission":string,"user_id":"{user_uuid}"}`  |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request GET \
+>  --url https://{app | stage-app}.current.tech/api/v2/auth/login/{ user_id } \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+
+</details>
+
+<details>
+ <summary><code>POST</code> <code><b>/conversion</b></code></summary>
+
+#### Parameters
+
+##### URL Parameters
+
+> | name            |  type      | data type        | description                                                                                       |
+> |-----------------|------------|------------------|---------------------------------------------------------------------------------------------------|
+> | `identifier`    | `required` | `string`         | `Unique token identifier supplied in Current provided Pixel`                                      |
+> | `token`         | `required` | `string \| null` | `tracking token - either discount code or token from cookie`                                      |
+> | `last_touch`    | `required` | `string \| null` | `timestamp of tracking token being set. Important for cookie based tracking`                      |
+> | `order_id`      | `required` | `string`         | `brand shop generated order_id`                                                                   |
+> | `discount_code` | `required` | `string \| null` | `discount_code input into shop`                                                                   |
+> | `cart_obj`      | `required` | `object`         | `Must include subtotal in dollars and cents eg. '55.23'. Other data will be stored but not used.` |
+
+##### Data Parameters
+
+> None
+
+#### Responses
+
+> | http code | http status message | content-type                      | response          |
+> |-----------|---------------------|-----------------------------------|-------------------|
+> | `200`     | `OK`           | `application/json`                | `{ "success": true }`  |
 
 *Standard error responses are used for most common errors.
 
