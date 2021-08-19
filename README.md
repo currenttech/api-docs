@@ -272,7 +272,7 @@
 
 > ```bash
 >  curl --request GET \
->  --url https://{app | stage-app}.current.tech/api/v2/auth/login/{ user_id } \
+>  --url https://{app | stage-app}.current.tech/api/v2/discount_code \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
 >  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
@@ -310,8 +310,8 @@
 #### Example cURL
 
 > ```bash
->  curl --request GET \
->  --url https://{app | stage-app}.current.tech/api/v2/auth/login/{ user_id } \
+>  curl --request POST \
+>  --url https://{app | stage-app}.current.tech/api/v2/conversion \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
 >  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
