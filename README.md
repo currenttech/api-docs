@@ -183,6 +183,88 @@
 
 </details>
 
+<details>
+ <summary><code>POST</code> <code><b>/password_reset_init</b></code> <code>(Generates and returns a password reset token that is valid for 15 minutes. This token must be provided along with the new password to complete the reset.)</code></summary>
+
+#### Parameters
+
+##### URL Parameters
+
+> None
+
+##### Data Parameters
+
+> | name           |  type        | data type             | description                      |
+> |----------------|--------------|-----------------------|----------------------------------|
+> | `email`        | `required`   | `string`              | `email address of the user`      |
+
+#### Responses
+
+> | http code | http status message | content-type                      | response      |
+> |-----------|---------------------|-----------------------------------|---------------|
+> | `200`     | `SUCCESS`           | `application/json`                | `{{ token }}` |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request POST \
+>  --url https://{app | stage-app}.current.tech/api/v2/auth/password_reset_init \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+>  --data '
+>  {
+>    "email": "john.doe@email.com"
+>  }
+>  '
+> ```
+
+</details>
+
+<details>
+ <summary><code>POST</code> <code><b>/password_reset_complete</b></code> <code>(Completes the password reset flow.)</code></summary>
+
+#### Parameters
+
+##### URL Parameters
+
+> None
+
+##### Data Parameters
+
+> | name           |  type        | data type             | description                        |
+> |----------------|--------------|-----------------------|------------------------------------|
+> | `token`        | `required`   | `string`              | `token generated in the init step` |
+> | `password`     | `required`   | `string`              | `new password created by user`     |
+
+#### Responses
+
+> | http code | http status message | content-type                      | response                                                          |
+> |-----------|---------------------|-----------------------------------|-------------------------------------------------------------------|
+> | `200`     | `SUCCESS`           | `application/json`                | `"redirect_url":"{ app_host }/dashboard?__csst={ unique_token }"` |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request POST \
+>  --url https://{app | stage-app}.current.tech/api/v2/auth/password_reset_complete \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+>  --data '
+>  {
+>    "token": "{ generated_token }",
+>    "password": "{ new_password }"
+>  }
+>  '
+> ```
+
+</details>
+
 ### Other Routes
 
 <details>
@@ -272,7 +354,7 @@
 
 > ```bash
 >  curl --request GET \
->  --url https://{app | stage-app}.current.tech/api/v2/discount_code \
+>  --url https://{app | stage-app}.current.tech/api/v2/discount_code/{ discount_code }} \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
 >  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
@@ -286,14 +368,14 @@
 
 ##### URL Parameters
 
-> | name            |  type      | data type        | description                                                                                       |
-> |-----------------|------------|------------------|---------------------------------------------------------------------------------------------------|
-> | `identifier`    | `required` | `string`         | `Unique token identifier supplied in Current provided Pixel`                                      |
-> | `token`         | `required` | `string \| null` | `tracking token - either discount code or token from cookie`                                      |
-> | `last_touch`    | `required` | `string \| null` | `timestamp of tracking token being set. Important for cookie based tracking`                      |
-> | `order_id`      | `required` | `string`         | `brand shop generated order_id`                                                                   |
-> | `discount_code` | `required` | `string \| null` | `discount_code input into shop`                                                                   |
-> | `cart_obj`      | `required` | `object`         | `Must include subtotal in dollars and cents eg. '55.23'. Other data will be stored but not used.` |
+> | name            |  type      | data type               | description                                                                                                      |
+> |-----------------|------------|-------------------------|------------------------------------------------------------------------------------------------------------------|
+> | `identifier`    | `required` | `string`                | `Unique token identifier supplied in Current provided Pixel`                                                     |
+> | `token`         | `required` | `string \| null`        | `tracking token - either discount code or token from cookie`                                                     |
+> | `last_touch`    | `required` | `string \| int \| null` | `timestamp of tracking token being set. Important for cookie based tracking. Expects milliseconds int or string` |
+> | `order_id`      | `required` | `string`                | `brand shop generated order_id`                                                                                  |
+> | `discount_code` | `required` | `string \| null`        | `discount_code input into shop`                                                                                  |
+> | `cart_obj`      | `required` | `object`                | `Must include subtotal in dollars and cents eg. '55.23'. Other data will be stored but not used.`                |
 
 ##### Data Parameters
 
@@ -310,7 +392,7 @@
 #### Example cURL
 
 > ```bash
->  curl --request POST \
+>  curl --request GET \
 >  --url https://{app | stage-app}.current.tech/api/v2/conversion \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
