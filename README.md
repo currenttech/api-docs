@@ -70,7 +70,7 @@
 
 > | http code | http status message | content-type                      | response                                                                                             |
 > |-----------|---------------------|-----------------------------------|------------------------------------------------------------------------------------------------------|
-> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{ app_host }/dashboard?__csst={ unique_token }","verified":boolean}` |
+> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{ app_host }/dashboard?__csst={ unique_token }","approved":boolean}` |
 
 *Standard error responses are used for most common errors.
 
@@ -106,7 +106,7 @@
 
 > | http code | http status message | content-type                      | response                                                                                             |
 > |-----------|---------------------|-----------------------------------|------------------------------------------------------------------------------------------------------|
-> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{ app_host }/dashboard?__csst={ unique_token }","verified":boolean}` |
+> | `200`     | `OK`           | `application/json`                | `"id":"{ user_id }","redirect_url":"{ app_host }/dashboard?__csst={ unique_token }","approved":boolean}` |
 
 *Standard error responses are used for most common errors.
 
@@ -158,8 +158,8 @@
 
 > | http code | http status message | content-type                      | response                                                                                                                                                                                            |
 > |-----------|---------------------|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-> | `201`     | `CREATED`           | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id":"{ user_id }",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"redirect_url":"{app_host}/join?__clt={unique_token}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"verified":boolean`<br/>`}` |
-> | `302`     | `FOUND`             | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id":"{ user_id }",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"redirect_url":"{app_host}/join?__clt={unique_token}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"verified":boolean`<br/>`}` |
+> | `201`     | `CREATED`           | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id":"{ user_id }",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"redirect_url":"{app_host}/join?__clt={unique_token}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"approved":boolean`<br/>`}` |
+> | `302`     | `FOUND`             | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id":"{ user_id }",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"redirect_url":"{app_host}/join?__clt={unique_token}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"approved":boolean`<br/>`}` |
 
 *Standard error responses are used for most common errors.
 
