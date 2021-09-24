@@ -8,7 +8,7 @@
 - All `Production` requests should use `https://app.current.tech/api/v2` as the host while all `stage/sandbox` requests should use `https://stage-app.current.tech/api/v2`
 - All requests and responses should include an `application/json` content-type header.
 
-- We have a Postman collection you can download to get up and running. [Current API](https://cdn.current.tech/deleloper-resources/api-resources/Current_API.postman_collection.json)
+- We have a Postman collection you can download <a href="https://cdn.current.tech/deleloper-resources/api-resources/Current_API.postman_collection.json" download>here</a>
 
 ## Standard Responses Examples
 
