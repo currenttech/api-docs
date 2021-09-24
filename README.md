@@ -8,7 +8,7 @@
 - All `Production` requests should use `https://app.current.tech/api/v2` as the host while all `stage/sandbox` requests should use `https://stage-app.current.tech/api/v2`
 - All requests and responses should include an `application/json` content-type header.
 
-- We have a Postman collection you can download <a href="https://cdn.current.tech/developer-resources/api-resources/Current+API.postman_collection.json">here</a>.
+- We have a Postman collection you can download <a href="https://cdn.current.tech/developer-resources/api-resources/Current%20API.postman_collection.json">here</a>.
 
 ## Standard Responses Examples
 
