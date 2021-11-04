@@ -8,7 +8,7 @@
 - All `Production` requests should use `https://app.current.tech/api/v2` as the host while all `stage/sandbox` requests should use `https://stage-app.current.tech/api/v2`
 - All requests and responses should include an `application/json` content-type header.
 
-- We have a Postman collection you can download <a href="https://cdn.current.tech/developer-resources/api-resources/Current_API.postman_collection.json">here</a>.
+- We have a Postman collection you can download <a href="https://influencer-bidi.s3.amazonaws.com/developer-resources/api-resources/Current_API.postman_collection.json">here</a>.
 
 ## Standard Responses Examples
 
@@ -153,7 +153,8 @@
 > | `location_str` | `optional`   | `string`              | `represents unstructured address or location of applicant`                                                                                                                                                                                                                                                                                                                                                                                   |
 > | `location`     | `optional`   | `JSON`                | `location or address of applicant.`<br/>`{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`line_1:string`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`line_2: string - usually Apt. # or unit #`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`locality: string - usually city`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`region: string - usually state/province`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`country: string - conforms to ISO 3166-1 alpha-2`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`postal_code: string`<br/>`}` |
 > | `tag`          | `optional`   | `string`              | `tag to be displayed in pending approvals section of Current. Common use case is to track application source domain or referrer`                                                                                                                                                                                                                                                                                                             |
-> | `tracking_code`| `optional`   | `string`              | `This is a discount/tracking code, optionally supplied by ambassador or client.`                                                                                                                                                                                                                                                                                                                                                             |
+> | `tracking_code`| `optional`   | `string`              | `This is a tracking code, optionally supplied by ambassador or client used in pretty links.`                                                                                                                                                                                                                                                                                                                                                             |
+> | `tracking_url` | `optional`   | `string`              | `This overrides the default referral link created by Current. This is where pretty link traffic will be redirected to.`                                                                                                                                                                                                                                                                                                                                                             |
 
 *Note: if both location and location_str are provided we will use the location object as it provides a better user experience later on.
 #### Responses
@@ -399,5 +400,49 @@
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
 >  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+
+</details>
+
+<details>
+ <summary><code>PUT</code> <code><b>/ambassador/referral_link/{user_id}</b></code></summary>
+
+#### Parameters
+
+##### URL Parameters
+
+> | name            |  type      | data type               | description                                                                                                      |
+> |-----------------|------------|-------------------------|------------------------------------------------------------------------------------------------------------------|
+> | `user_id`       | `required` | `string`                | `the user id returned from /signup auth api request`                                                             |
+
+##### Data Parameters
+
+> | name           |  type        | data type  | description                                                                                                      |
+> |----------------|--------------|------------|------------------------------------------------------------------------------------------------------------------|
+> | `tracking_code`| `optional`   | `string`   | `A unique tracking code, optionally supplied by ambassador or client to be used in pretty links`                 |
+> | `tracking_url` | `required`   | `string`   | `Overrides the default referral link created by Current. This is where pretty link traffic will be redirected.`  |
+
+#### Responses
+
+> | http code | http status message | content-type                      | response               |
+> |-----------|---------------------|-----------------------------------|------------------------|
+> | `200`     | `OK`                | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"type": "user",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id": "{user_id}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"tracking_code": "{supplied or generated code}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"tracking_url": "{supplied_url}",`<br/>`}`  |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request PUT \
+>  --url https://{app | stage-app}.current.tech/api/v2/ambassador/referral_link/{user_id} \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+>  --data '
+>  {
+>    "tracking_code": "SARAJ",
+>    "tracking_url": "https://sub.storedomain.com/promotedproduct",
+>  }
+>  '
+> ```
 
 </details>
