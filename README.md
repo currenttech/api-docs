@@ -446,3 +446,52 @@
 > ```
 
 </details>
+
+<details>
+ <summary><code>POST</code> <code><b>/ambassador/social_links/{user_id}</b></code></summary>
+
+#### Parameters
+
+##### URL Parameters
+
+> | name            |  type      | data type               | description                                                                                                      |
+> |-----------------|------------|-------------------------|------------------------------------------------------------------------------------------------------------------|
+> | `user_id`       | `required` | `string`                | `the user id returned from /signup auth api request`                                                             |
+
+##### Data Parameters
+
+> | name           |  type        | data type  | description                                                                                                                                       |
+> |----------------|--------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+> | `social_links` | `required`   | `object`   | `Object containing key/value pairs. The keys are social networks in lowercase. The value should be the ambassadors social link for that network.` |
+
+*NOTE: Allowed keys are facebook, instagram, tiktok, twitter, youtube. Only supply the key/value pairs that you wish to update.
+
+#### Responses
+
+> | http code | http status message | content-type                      | response               |
+> |-----------|---------------------|-----------------------------------|------------------------|
+> | `200`     | `OK`                | `application/json`                | `{`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"type": "user",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"id": "{user_id}",`<br/>&nbsp;&nbsp;&nbsp;&nbsp;`"social_links": "{social links object}",`<br/>`}`  |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request POST \
+>  --url https://{app | stage-app}.current.tech/api/v2/ambassador/social_links/{user_id} \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+>  --data '
+>  {
+>    "social_links": {
+>      "facebook": "https://www.facebook.com/userhandle",
+>      "instagram": "https://www.instagram.com/userhandle",
+>      "tiktok": "https://www.tiktok.com/@userhandle",
+>    }
+>  }
+>  '
+> ```
+
+</details>
+
