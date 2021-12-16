@@ -331,6 +331,47 @@
 </details>
 
 <details>
+ <summary><code>GET</code> <code><b>/ambassadors</b></code></summary>
+
+#### Parameters
+
+##### Query Parameters
+
+> | name                     |  type        | data type   | description                                           |
+> |--------------------------|--------------|-------------|-------------------------------------------------------|
+> | `page`                   | `optional`   | `int32`     | `page of results starts/defaults to 1`                |
+> | `per_page`               | `optional`   | `int32`     | `results per page. Max 100, default 50`               |
+> | `created_at_lower_bound` | `optional`   | `date`      | `Used to return ambassadors created after some date`  |
+> | `created_at_upper_bound` | `optional`   | `date`      | `Used to return ambassadors created before some date` |
+
+##### URL Parameters
+
+> None
+
+##### Data Parameters
+
+> None
+
+#### Responses
+
+> | http code | http status message | content-type                 | response                             |
+> |-----------|---------------------|------------------------------|--------------------------------------|
+> | `200`     | `OK`                | `application/json`           | `{ "count": int32, "results": [] }`  |
+
+*Standard error responses are used for most common errors.
+
+#### Example cURL
+
+> ```bash
+>  curl --request GET \
+>  --url https://{app | stage-app}.current.tech/api/v2/ambassadors?page=1&per_page=100 \
+>  --header 'Accept: application/json' \
+>  --header 'Content-Type: application/json' \
+>  --header 'Authorization: Basic {{ Generated_Basic_Auth_Token }}' \
+
+</details>
+
+<details>
  <summary><code>GET</code> <code><b>/discount_code/{discount_code}</b></code></summary>
 
 #### Parameters
@@ -395,7 +436,7 @@
 #### Example cURL
 
 > ```bash
->  curl --request GET \
+>  curl --request POST \
 >  --url https://{app | stage-app}.current.tech/api/v2/conversion \
 >  --header 'Accept: application/json' \
 >  --header 'Content-Type: application/json' \
@@ -494,4 +535,3 @@
 > ```
 
 </details>
-
